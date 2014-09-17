@@ -12,4 +12,10 @@ script:
     - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=master --libraries=${BOOST_LIBRARIES}
 
 after_success:
-    - ls
+    - mkdir cover
+    - find ./ -name "*.gcda" -exec cp "{}" ./cover \;
+    - find ./ -name "*.gcno" -exec cp "{}" ./cover \;
+    - sudo apt-get install -qq python-yaml lcov
+    - lcov --directory ./cover --base-directory ./cover --capture --output-file cover/coverage.info
+    - gem install coveralls-lcov
+    - coveralls-lcov cover/coverage.info
