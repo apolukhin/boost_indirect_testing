@@ -2,7 +2,7 @@ os:
     - linux
 
 env:
-    - BOOST_LIBRARIES=any
+    - BOOST_LIBRARIES=any,lexical_cast,variant,type_index,core
 
 before_install:
     - echo OS is ${TRAVIS_OS_NAME}
@@ -13,9 +13,10 @@ script:
 
 after_success:
     - mkdir cover
-    - find ./ -name "*.gcda" -exec cp "{}" ./cover \;
-    - find ./ -name "*.gcno" -exec cp "{}" ./cover \;
+    - find ./ -name "*.gcda" -exec cp "{}" ../cover \;
+    - find ./ -name "*.gcno" -exec cp "{}" ../cover \;
     - sudo apt-get install -qq python-yaml lcov
-    - lcov --directory ./cover --base-directory ./cover --capture --output-file cover/coverage.info
+    - lcov --directory ../cover --base-directory ../cover --capture --output-file ../cover/coverage.info
+    - lcov --remove ../cover/coverage.info '/usr*' -o ../cover/coverage.info
     - gem install coveralls-lcov
-    - coveralls-lcov cover/coverage.info
+    - coveralls-lcov ../cover/coverage.info
