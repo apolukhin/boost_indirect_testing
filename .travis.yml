@@ -1,0 +1,15 @@
+os:
+    - linux
+
+env:
+    - BOOST_LIBRARIES=any
+
+before_install:
+    - echo OS is ${TRAVIS_OS_NAME}
+    - wget https://raw.githubusercontent.com/boostorg/boost/develop/tools/regression/src/run.py
+
+script:
+    - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=develop --libraries=${BOOST_LIBRARIES}
+
+after_success:
+    - ls
