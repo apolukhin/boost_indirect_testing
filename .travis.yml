@@ -9,7 +9,7 @@ before_install:
     - wget https://raw.githubusercontent.com/boostorg/boost/develop/tools/regression/src/run.py
 
 script:
-    - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=develop --libraries=${BOOST_LIBRARIES}
+    - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=master --libraries=${BOOST_LIBRARIES}
 
 after_success:
     - ls
