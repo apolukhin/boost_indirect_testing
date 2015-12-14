@@ -1,21 +1,37 @@
+# Use, modification, and distribution are
+# subject to the Boost Software License, Version 1.0. (See accompanying
+# file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+#
+# Copyright Antony Polukhin 2014-2015.
+
+sudo: false
 os:
     - linux
 
 env:
-    - BOOST_LIBRARIES=any,lexical_cast,variant,type_index,core
+    - BOOST_LIBRARIES=
+    #--libraries=any,lexical_cast,variant,type_index,core
+
+# Installing additional tools
+addons:
+  apt:
+    packages:
+    - valgrind
+    - python-yaml
+    - lcov
 
 before_install:
+    - BOOST_TAG=develop
     - echo OS is ${TRAVIS_OS_NAME}
     - wget https://raw.githubusercontent.com/boostorg/boost/develop/tools/regression/src/run.py
 
 script:
-    - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=master --libraries=${BOOST_LIBRARIES}
+    - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=${BOOST_TAG} ${BOOST_LIBRARIES}
 
 after_success:
     - mkdir cover
     - find ./ -name "*.gcda" -exec cp "{}" ../cover \;
     - find ./ -name "*.gcno" -exec cp "{}" ../cover \;
-    - sudo apt-get install -qq python-yaml lcov
     - lcov --directory ../cover --base-directory ../cover --capture --output-file ../cover/coverage.info
     - lcov --remove ../cover/coverage.info '/usr*' -o ../cover/coverage.info
     - gem install coveralls-lcov
