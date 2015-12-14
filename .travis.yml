@@ -23,7 +23,7 @@ addons:
 before_install:
     - BOOST_TAG=develop
     - echo OS is ${TRAVIS_OS_NAME}
-    - wget https://raw.githubusercontent.com/boostorg/boost/develop/tools/regression/src/run.py
+    - wget https://raw.githubusercontent.com/boostorg/regression/develop/testing/src/run.py
 
 script:
     - python run.py --runner=indirect_travisci_tests --toolsets=gcc --tag=${BOOST_TAG} ${BOOST_LIBRARIES}
