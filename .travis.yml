@@ -9,8 +9,14 @@ os:
     - linux
 
 env:
-    - BOOST_LIBRARIES=
-    #--libraries=any,lexical_cast,variant,type_index,core
+    - BOOST_LIBRARIES=--libraries=accumulators,algorithm,align,any,application,array,asio,assert,assign,atomic,bimap,bind,chrono,circular_buffer,compatibility,compute,concept_check,config,container,context
+    - BOOST_LIBRARIES=--libraries=conversion,convert,core,coroutine,coroutine2,crc,date_time,detail,disjoint_sets,dll,document,dynamic_bitset,endian,exception,filesystem,flyweight,foreach,format
+    - BOOST_LIBRARIES=--libraries=function,functional,function_types,fusion,geometry,gil,graph,graph_parallel,heap,icl,integer,interprocess,intrusive,io,iostreams,iterator,lambda,lexical_cast
+    - BOOST_LIBRARIES=--libraries=,locale,local_function,lockfree,log,logic,math,move,mpi,mpl,msm,multi_array,multi_index,multiprecision,numeric,optional,parameter,phoenix,polygon,pool
+    - BOOST_LIBRARIES=--libraries=predef,preprocessor,program_options,property_map,property_tree,proto,ptr_container,python,random,range,ratio,rational,regex,scope_exit,serialization
+    - BOOST_LIBRARIES=--libraries=signals,signals2,smart_ptr,sort,spirit,statechart,static_assert,sync,system,test,thread,throw_exception,timer,tokenizer,tr1,trie,tti,tuple,type_erasure
+    - BOOST_LIBRARIES=--libraries=type_index,typeof,type_traits,units,unordered,utility,uuid,variant,vmd,wave,winapi,xpressive,
+    # Libs list getting: echo -n "--libraries="; for i in $(ls -d */); do echo -n "${i%%/},"; done; echo
 
 # Installing additional tools
 addons:
