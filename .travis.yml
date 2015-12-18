@@ -9,12 +9,10 @@ os:
     - linux
 
 env:
-    - BOOST_LIBRARIES=--libraries=accumulators,algorithm,align,any,application,array,asio,assert,assign,atomic,bimap,bind,chrono,circular_buffer,compatibility,compute,concept_check,config,container,context
-    - BOOST_LIBRARIES=--libraries=conversion,convert,core,coroutine,coroutine2,crc,date_time,detail,disjoint_sets,dll,document,dynamic_bitset,endian,exception,filesystem,flyweight,foreach,format
-    - BOOST_LIBRARIES=--libraries=function,functional,function_types,fusion
-    - BOOST_LIBRARIES=--libraries=geometry,gil,graph
-    - BOOST_LIBRARIES=--libraries=graph_parallel,heap,icl,integer,interprocess,intrusive,io,iostreams,iterator,lambda,lexical_cast
-    - BOOST_LIBRARIES=--libraries=,locale,local_function,lockfree,log,logic,math,move,mpi,mpl,msm,multi_array,multi_index,multiprecision,numeric,optional,parameter,phoenix,polygon,pool
+    - BOOST_LIBRARIES=--libraries=accumulators,algorithm,align,any,application,array,asio,assert,assign,atomic,bimap,bind,chrono,circular_buffer,compatibility,compute,concept_check,config,container,context,conversion,convert,core,coroutine,coroutine2,crc,date_time,detail,disjoint_sets,dll,document,dynamic_bitset,endian,exception,filesystem,flyweight,foreach,format,function,functional,function_types,fusion
+    - BOOST_LIBRARIES=--libraries=geometry
+    - BOOST_LIBRARIES=--libraries=gil,graph
+    - BOOST_LIBRARIES=--libraries=graph_parallel,heap,icl,integer,interprocess,intrusive,io,iostreams,iterator,lambda,lexical_cast,locale,local_function,lockfree,log,logic,math,move,mpi,mpl,msm,multi_array,multi_index,multiprecision,numeric,optional,parameter,phoenix,polygon,pool
     - BOOST_LIBRARIES=--libraries=predef,preprocessor,program_options,property_map,property_tree,proto,ptr_container,python,random,range,ratio,rational,regex,scope_exit,serialization
     - BOOST_LIBRARIES=--libraries=signals,signals2,smart_ptr,sort,spirit,statechart,static_assert,sync,system,test,thread,throw_exception,timer,tokenizer,tr1,trie,tti,tuple,type_erasure
     - BOOST_LIBRARIES=--libraries=type_index,typeof,type_traits,units,unordered,utility,uuid,variant,vmd,wave,winapi,xpressive,
@@ -31,6 +29,8 @@ addons:
 before_install:
     - BOOST_TAG=develop
     - echo OS is ${TRAVIS_OS_NAME}
+    - mkdir $HOME/do_test
+    - cd $HOME/do_test
     - wget https://raw.githubusercontent.com/boostorg/regression/develop/testing/src/run.py
 
 script:
